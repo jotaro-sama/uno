@@ -4,7 +4,7 @@ using Uno.UI.Samples.Controls;
 
 namespace UITests.Shared.Windows_UI_Xaml.UIElementTests
 {
-	[SampleControlInfo(category: "UIElement")]
+	[SampleControlInfo(category: "Clip")]
 	public sealed partial class UIElementClipping : Page
 	{
 		public UIElementClipping()

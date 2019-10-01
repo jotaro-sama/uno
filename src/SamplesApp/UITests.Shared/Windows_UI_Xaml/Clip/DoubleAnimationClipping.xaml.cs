@@ -7,10 +7,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-
 namespace UITests.Shared.Windows_UI_Xaml.Clip
 {
-
 	[SampleControlInfo(category: "Clip", description: "[Android]When going to `Ready` state the WebView expand to full screen and cover other control when it shouldn't be.")]
 	public sealed partial class DoubleAnimationClipping : UserControl
 	{

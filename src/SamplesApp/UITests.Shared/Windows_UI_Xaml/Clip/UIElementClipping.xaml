@@ -84,8 +84,7 @@
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					BorderBrush="BlueViolet"
-					BorderThickness="4.25"
-					MaxWidth="150">
+					BorderThickness="4.25">
 				<StackPanel Orientation="Horizontal">
 					<StackPanel>
 						<StackPanel.RenderTransform>

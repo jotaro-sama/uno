@@ -16,6 +16,8 @@ namespace Windows.UI.Xaml
 		private Size _unclippedDesiredSize;
 		private Point _visualOffset;
 
+		private const double SIZE_EPSILON = 0.05;
+
 		/// <summary>
 		/// The origin of the view's bounds relative to its parent.
 		/// </summary>
@@ -111,7 +113,9 @@ namespace Windows.UI.Xaml
 
 		private void InnerArrangeCore(Rect finalRect)
 		{
+			_logDebug?.Debug($"{this}: InnerArrangeCore({finalRect})");
 			var arrangeSize = finalRect.Size;
+			var needsClipping = false;
 
 			var (minSize, maxSize) = this.GetMinMax();
 			var marginSize = this.GetMarginSize();
@@ -120,7 +124,25 @@ namespace Windows.UI.Xaml
 				.Subtract(marginSize)
 				.AtLeast(new Size(0, 0));
 
-			arrangeSize = arrangeSize.AtLeast(_unclippedDesiredSize);
+			//arrangeSize = arrangeSize.AtLeast(_unclippedDesiredSize);
+
+			var allowClip = (this as ICustomClippingElement)?.AllowClippingToBounds ?? true; // Some controls may allow clipping
+			_logDebug?.Debug($"{this}: InnerArrangeCore({finalRect}) - allowClip={allowClip}, arrangeSize={arrangeSize}, _unclippedDesiredSize={_unclippedDesiredSize}");
+
+			if (allowClip)
+			{
+				if (arrangeSize.Width < _unclippedDesiredSize.Width - SIZE_EPSILON)
+				{
+					_logDebug?.Debug($">1>{this}: (Width) {arrangeSize.Width} < {_unclippedDesiredSize.Width}: NEEDS CLIPPING 1");
+					needsClipping = true;
+				}
+
+				if (arrangeSize.Height < _unclippedDesiredSize.Height - SIZE_EPSILON)
+				{
+					_logDebug?.Debug($">2>{this}: (Height) {arrangeSize.Height} < {_unclippedDesiredSize.Height}: NEEDS CLIPPING 2");
+					needsClipping = true;
+				}
+			}
 
 			if (HorizontalAlignment != HorizontalAlignment.Stretch)
 			{
@@ -134,6 +156,21 @@ namespace Windows.UI.Xaml
 
 			var effectiveMaxSize = Max(_unclippedDesiredSize, maxSize);
 			arrangeSize = arrangeSize.AtMost(effectiveMaxSize);
+
+			if (allowClip)
+			{
+				if (effectiveMaxSize.Width < arrangeSize.Width - SIZE_EPSILON)
+				{
+					_logDebug?.Debug($">3>{this}: (Width) {effectiveMaxSize.Width} < {arrangeSize.Width}: NEEDS CLIPPING 3");
+					needsClipping = true;
+				}
+
+				if (effectiveMaxSize.Height < arrangeSize.Height - SIZE_EPSILON)
+				{
+					_logDebug?.Debug($">4>{this}: (Height) {effectiveMaxSize.Height} < {arrangeSize.Height}: NEEDS CLIPPING 4");
+					needsClipping = true;
+				}
+			}
 
 			var oldRenderSize = RenderSize;
 			var innerInkSize = ArrangeOverride(arrangeSize);
@@ -156,6 +193,8 @@ namespace Windows.UI.Xaml
 
 			_logDebug?.Debug(
 					$"[{this}] ArrangeChild(offset={offset}, margin={Margin}) [oldRenderSize={oldRenderSize}] [RequiresClipping={needsClipping}]");
+
+			RequiresClipping = needsClipping;
 		}
 
 		internal Thickness GetThicknessAdjust()
@@ -199,7 +238,7 @@ namespace Windows.UI.Xaml
 			{
 				// Disable clipping for Scrollviewer (edge seems to disable scrolling if 
 				// the clipping is enabled to the size of the scrollviewer, even if overflow-y is auto)
-				if (this is Controls.ScrollViewer)
+				if (!RequiresClipping || this is Controls.ScrollViewer)
 				{
 					return null;
 				}
@@ -211,7 +250,7 @@ namespace Windows.UI.Xaml
 				return new Rect(0, 0, newRect.Width, newRect.Height);
 			}
 
-			ArrangeElementNative(newRect, getClip());
+			ArrangeElementNative(newRect, RequiresClipping, getClip());
 		}
 	}
 }

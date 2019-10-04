@@ -9,8 +9,8 @@ using Uno.Logging;
 
 namespace Windows.UI.Xaml.Controls
 {
-    public partial class Canvas
-    {
+	public partial class Canvas : ICustomClippingElement
+	{
 		protected override Size MeasureOverride(Size availableSize)
 		{
 			double maxWidth = 0, maxHeight = 0;
@@ -37,8 +37,8 @@ namespace Windows.UI.Xaml.Controls
 
 				var childRect = new Rect
 				{
-					X = GetLeft(child as DependencyObject),
-					Y = GetTop(child as DependencyObject),
+					X = GetLeft((DependencyObject) child),
+					Y = GetTop((DependencyObject) child),
 					Width = desiredSize.Width,
 					Height = desiredSize.Height,
 				};
@@ -64,5 +64,7 @@ namespace Windows.UI.Xaml.Controls
 
 			return finalSize;
 		}
+
+		bool ICustomClippingElement.AllowClippingToBounds => false;
 	}
 }

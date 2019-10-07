@@ -124,8 +124,6 @@ namespace Windows.UI.Xaml
 				.Subtract(marginSize)
 				.AtLeast(new Size(0, 0));
 
-			//arrangeSize = arrangeSize.AtLeast(_unclippedDesiredSize);
-
 			var allowClip = (this as ICustomClippingElement)?.AllowClippingToBounds ?? true; // Some controls may allow clipping
 			_logDebug?.Debug($"{this}: InnerArrangeCore({finalRect}) - allowClip={allowClip}, arrangeSize={arrangeSize}, _unclippedDesiredSize={_unclippedDesiredSize}");
 
@@ -189,12 +187,12 @@ namespace Windows.UI.Xaml
 				offset.Y + finalRect.Y + Margin.Top
 			);
 
-			ArrangeNative(offset, oldRenderSize);
-
 			_logDebug?.Debug(
-					$"[{this}] ArrangeChild(offset={offset}, margin={Margin}) [oldRenderSize={oldRenderSize}] [RequiresClipping={needsClipping}]");
+				$"[{this}] ArrangeChild(offset={offset}, margin={Margin}) [oldRenderSize={oldRenderSize}] [RequiresClipping={needsClipping}]");
 
 			RequiresClipping = needsClipping;
+
+			ArrangeNative(offset, oldRenderSize);
 		}
 
 		internal Thickness GetThicknessAdjust()
@@ -236,21 +234,24 @@ namespace Windows.UI.Xaml
 
 			Rect? getClip()
 			{
-				// Disable clipping for Scrollviewer (edge seems to disable scrolling if 
-				// the clipping is enabled to the size of the scrollviewer, even if overflow-y is auto)
-				if (!RequiresClipping || this is Controls.ScrollViewer)
-				{
-					return null;
-				}
-				else if (Clip != null)
+				if (Clip != null)
 				{
 					return Clip.Rect;
 				}
 
-				return new Rect(0, 0, newRect.Width, newRect.Height);
+				if (RequiresClipping)
+				{
+					return new Rect(0, 0, newRect.Width, newRect.Height);
+				}
+
+				return null;
 			}
 
-			ArrangeElementNative(newRect, RequiresClipping, getClip());
+			var clipRect = getClip();
+
+			_logDebug?.Trace($"{this}.ArrangeElementNative({newRect}, clip={clipRect} (RequiresClipping={RequiresClipping})");
+
+			ArrangeElementNative(newRect, RequiresClipping, clipRect);
 		}
 	}
 }

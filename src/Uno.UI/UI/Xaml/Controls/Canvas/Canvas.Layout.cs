@@ -34,21 +34,22 @@ namespace Windows.UI.Xaml.Controls
 			foreach (var child in Children.Where(c => c is DependencyObject))
 			{
 				var desiredSize = GetElementDesiredSize(child);
+				var childDO = (DependencyObject)child;
 
 				var childRect = new Rect
 				{
-					X = GetLeft((DependencyObject) child),
-					Y = GetTop((DependencyObject) child),
+					X = GetLeft(childDO),
+					Y = GetTop(childDO),
 					Width = desiredSize.Width,
 					Height = desiredSize.Height,
 				};
 
 #if __IOS__
-				child.Layer.ZPosition = (nfloat)GetZIndex(child as DependencyObject);
+				child.Layer.ZPosition = (nfloat)GetZIndex(childDO);
 #elif __ANDROID__
 				if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
 				{
-					child.SetZ((float)GetZIndex(child as DependencyObject));
+					child.SetZ((float)GetZIndex(childDO));
 				}
 				else
 				{

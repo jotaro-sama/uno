@@ -58,4 +58,4 @@ area/wasm:
   - src/Uno.UI.Wasm/**/*
 
 hidden-folder-test-nested-2:
-  - '.**/**/*.test
+  - '.**/**/*.test'

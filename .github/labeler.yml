@@ -57,5 +57,5 @@ area/wasm:
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*
 
-hidden-folder-yml-test2:
-  - '.**/**/*.yml'
+hidden-folder-test-nested:
+  - '.**/**/*.test

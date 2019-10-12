@@ -5,7 +5,6 @@ using System.Text;
 using Uno.Extensions;
 using Uno.Logging;
 
-//Useless comment
 namespace Windows.UI.Xaml.Media.Animation
 {
 	internal static partial class AnimatorFactory

@@ -10,7 +10,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-// Useless comment, could be removed later
 namespace Windows.UI.ViewManagement
 {
 	public partial class InputPane

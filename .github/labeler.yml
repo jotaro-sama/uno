@@ -13,7 +13,7 @@ area/automation:
 area/android:
   - src/Uno.UI.BindingHelper.Android/*
   - src/Uno.UI.BindingHelper.Android/**/*
-  - /**/*.Android.cs
+  - src/**/*.Android.cs
   - ./**/*.android.cs
   - ./**/*.droid.cs
 

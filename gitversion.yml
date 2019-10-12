@@ -1,4 +1,3 @@
-# delete after test
 assembly-versioning-scheme: MajorMinorPatch
 mode: Mainline
 next-version: 2.0.0

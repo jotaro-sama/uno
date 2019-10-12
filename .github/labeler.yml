@@ -13,18 +13,14 @@ area/automation:
 area/android:
   - src/Uno.UI.BindingHelper.Android/*
   - src/Uno.UI.BindingHelper.Android/**/*
-  - src/**/*.Android.cs
-  - src/**/*.android.cs
-  - src/**/*.droid.cs
+  - '**/*.Android.cs'
+  - '**/*.android.cs'
+  - '**/*.droid.cs'
 
 area/build:
   - build/*
   - build/**/*
-  - .github/**/*.yml
-  - doc/**/*.yml
-  - src/**/*.yml
-  - .dependabot/**/*.yml
-  - ./*.yml
+  - '**/*.yml'
   - src/Uno.UI.AssemblyComparer/*
   - src/Uno.UI.AssemblyComparer/**/*
   - src/Uno.UI.TestComparer/*

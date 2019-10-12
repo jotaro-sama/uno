@@ -21,7 +21,6 @@ area/build:
   - build/*
   - build/**/*
   - '**/*.yml'
-  - .github/*
   - src/Uno.UI.AssemblyComparer/*
   - src/Uno.UI.AssemblyComparer/**/*
   - src/Uno.UI.TestComparer/*
@@ -58,5 +57,5 @@ area/wasm:
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*
 
-hidden-test:
-  - '.*'
+hidden-folder-yml:
+  - '.**/*.yml'

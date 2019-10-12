@@ -58,5 +58,5 @@ area/wasm:
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*
 
-hidden:
-  - '**/.*'
+hidden-root:
+  - '.*'

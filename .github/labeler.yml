@@ -38,12 +38,12 @@ kind/documentation:
   - docs/*
   - docs/**/*
   - '**/*.md'
-  - ./**/*.MD
-  - ./**/*.txt
+  - '**/*.MD'
+  - '**/*.txt'
 
 area/ios:
-  - src/**/*.iOS.cs
-  - src/**/*.ios.cs
+  - '**/*.iOS.cs'
+  - '**/*.ios.cs'
 
 area/solution-templates:
   - src/SolutionTemplate/*
@@ -52,7 +52,7 @@ area/solution-templates:
   - src/UnoItemTemplate/**/*
 
 area/wasm:
-  - src/**/*.wasm.cs
-  - src/**/*.WASM.cs
+  - '**/*.wasm.cs'
+  - '**/*.WASM.cs'
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*

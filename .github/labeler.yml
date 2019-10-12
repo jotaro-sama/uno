@@ -14,8 +14,8 @@ area/android:
   - src/Uno.UI.BindingHelper.Android/*
   - src/Uno.UI.BindingHelper.Android/**/*
   - src/**/*.Android.cs
-  - ./**/*.android.cs
-  - ./**/*.droid.cs
+  - src/**/*.android.cs
+  - src/**/*.droid.cs
 
 area/build:
   - build/*
@@ -42,8 +42,8 @@ kind/documentation:
   - ./**/*.txt
 
 area/ios:
-  - ./**/*.iOS.cs
-  - ./**/*.ios.cs
+  - src/**/*.iOS.cs
+  - src/**/*.ios.cs
 
 area/solution-templates:
   - src/SolutionTemplate/*
@@ -52,7 +52,7 @@ area/solution-templates:
   - src/UnoItemTemplate/**/*
 
 area/wasm:
-  - ./**/*.wasm.cs
-  - ./**/*.WASM.cs
+  - src/**/*.wasm.cs
+  - src/**/*.WASM.cs
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*

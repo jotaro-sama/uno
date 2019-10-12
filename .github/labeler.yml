@@ -21,6 +21,7 @@ area/build:
   - build/*
   - build/**/*
   - '**/*.yml'
+  - '.**/**/*.yml'
   - src/Uno.UI.AssemblyComparer/*
   - src/Uno.UI.AssemblyComparer/**/*
   - src/Uno.UI.TestComparer/*
@@ -38,8 +39,11 @@ kind/documentation:
   - docs/*
   - docs/**/*
   - '**/*.md'
+  - '.**/**/*.md'
   - '**/*.MD'
+  - '.**/**/*.MD'
   - '**/*.txt'
+  - '.**/**/*.txt'
 
 area/ios:
   - '**/*.iOS.cs'
@@ -56,6 +60,3 @@ area/wasm:
   - '**/*.WASM.cs'
   - src/Uno.UI.Wasm/*
   - src/Uno.UI.Wasm/**/*
-
-hidden-folder-test-nested-2:
-  - '.**/**/*.test'

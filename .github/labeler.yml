@@ -41,7 +41,7 @@ kind/documentation:
   - README.*
   - docs/*
   - docs/**/*
-  - ./*.md
+  - '**/*.md'
   - ./**/*.MD
   - ./**/*.txt
 

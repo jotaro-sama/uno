@@ -60,12 +60,16 @@ namespace Windows.UI.Xaml.Input
 			}
 			else // Focused
 			{
-				(_focusedElement as Control)?.Unfocus();
-				_focusedElement = control;
+				if (_focusedElement != control)
+				{
+					(_focusedElement as Control)?.Unfocus();
+					_focusedElement = control;
+				}
+				
 				_fallbackFocusedElement = control;
 
 #if __ANDROID__
-				// Forcefully try to bring the control into view when keyboard is open to accomodate adjust nothing mode
+				// Forcefully try to bring the control into view when keyboard is open to accommodate adjust nothing mode
 				if (InputPane.GetForCurrentView().Visible)
 				{
 					control.StartBringIntoView();

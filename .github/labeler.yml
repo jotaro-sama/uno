@@ -20,7 +20,11 @@ area/android:
 area/build:
   - build/*
   - build/**/*
-  - ./**/*.yml
+  - .github/**/*.yml
+  - doc/**/*.yml
+  - src/**/*.yml
+  - .dependabot/**/*.yml
+  - ./*.yml
   - src/Uno.UI.AssemblyComparer/*
   - src/Uno.UI.AssemblyComparer/**/*
   - src/Uno.UI.TestComparer/*
